@@ -2,15 +2,7 @@ pipeline {
     agent any
    
     stages {
-        // Etapa de Build
-        stage('Build') {
-            steps {
-                echo 'Construyendo el proyecto...'
-                // Aquí ejecutamos un build, generalmente con un comando como `npm run build`
-                sh 'npm run build'
-            }
-        }
-
+        
         // Etapa de Testing
         stage('Testing') {
             parallel {
@@ -31,6 +23,15 @@ pipeline {
                         sh 'npm run test:enzyme'
                     }
                 }
+            }
+        }
+        
+        // Etapa de Build
+        stage('Build') {
+            steps {
+                echo 'Construyendo el proyecto...'
+                // Aquí ejecutamos un build, generalmente con un comando como `npm run build`
+                sh 'npm run build'
             }
         }
 
