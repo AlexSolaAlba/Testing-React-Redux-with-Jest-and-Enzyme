@@ -8,18 +8,12 @@ pipeline {
     }
 
     stages {
-        // Etapa de Instalación de dependencias
-        stage('Install Dependencies') {
+        // Etapa de Build
+        stage('Build') {
             steps {
-                script {
-                    echo 'Instalando dependencias del proyecto...'
-                    // Instalar dependencias de Node.js (asumiendo que hay un package.json)
-                    sh '''
-                        export NVM_DIR="$HOME/.nvm"
-                        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-                        npm install
-                    '''
-                }
+                echo 'Construyendo el proyecto...'
+                // Aquí ejecutamos un build, generalmente con un comando como `npm run build`
+                sh 'npm run build'
             }
         }
 
@@ -43,15 +37,6 @@ pipeline {
                         sh 'npm run test:enzyme'
                     }
                 }
-            }
-        }
-
-        // Etapa de Build
-        stage('Build') {
-            steps {
-                echo 'Construyendo el proyecto...'
-                // Aquí ejecutamos un build, generalmente con un comando como `npm run build`
-                sh 'npm run build'
             }
         }
 
