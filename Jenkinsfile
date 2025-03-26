@@ -1,22 +1,13 @@
 pipeline {
     agent any
-    
-    environment {
-        // Usamos node.js para este proyecto React/Redux
-        NVM_DIR = "/home/alumno/.nvm"
-        PATH = "/home/alumno/.nvm/versions/node/v18.20.7/bin:$PATH"
-    }
-
+   
     stages {
         // Etapa de Build
         stage('Build') {
             steps {
                 echo 'Construyendo el proyecto...'
                 // Aquí ejecutamos un build, generalmente con un comando como `npm run build`
-                sh '''
-                chmod +x /home/alumno/.nvm/versions/node/v18.20.7/bin/npm
-                npm run build
-            '''
+                sh npm run build
             }
         }
 
