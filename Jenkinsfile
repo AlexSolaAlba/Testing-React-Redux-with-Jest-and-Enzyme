@@ -7,7 +7,7 @@ pipeline {
             steps {
                 echo 'Construyendo el proyecto...'
                 // Aquí ejecutamos un build, generalmente con un comando como `npm run build`
-                sh npm run build
+                sh 'npm run build'
             }
         }
 
