@@ -13,7 +13,12 @@ pipeline {
             steps {
                 echo 'Construyendo el proyecto...'
                 // Aquí ejecutamos un build, generalmente con un comando como `npm run build`
-                sh 'npm run build'
+                sh '''
+                export NVM_DIR="$HOME/.nvm"
+                [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+                chmod +x $(which npm) # Asegurar permisos
+                npm run build
+            '''
             }
         }
 
