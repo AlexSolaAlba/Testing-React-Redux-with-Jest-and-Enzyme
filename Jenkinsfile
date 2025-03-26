@@ -3,6 +3,7 @@ pipeline {
     
     environment {
         // Usamos node.js para este proyecto React/Redux
+        NVM_DIR = "/home/alumno/.nvm"
         PATH = "/home/alumno/.nvm/versions/node/v18.20.7/bin:$PATH"
     }
 
@@ -13,7 +14,11 @@ pipeline {
                 script {
                     echo 'Instalando dependencias del proyecto...'
                     // Instalar dependencias de Node.js (asumiendo que hay un package.json)
-                    sh 'export NVM_DIR="$HOME/.nvm" && . "$NVM_DIR/nvm.sh" && npm install'
+                    sh '''
+                        export NVM_DIR="$HOME/.nvm"
+                        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+                        npm install
+                    '''
                 }
             }
         }
