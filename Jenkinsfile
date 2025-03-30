@@ -12,10 +12,13 @@ pipeline {
 			steps {
 				script {
 					sh 'export PATH=$PATH:/usr/local/bin'
+					sh 'node -v'  // Verifica si Node.js está disponible
+					sh 'npm -v'   // Verifica si npm está disponible
 					sh 'npm install'
 				}
 			}
 		}
+
 
         
         stage('Build') {
