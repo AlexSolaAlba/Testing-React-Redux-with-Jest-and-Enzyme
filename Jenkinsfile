@@ -13,8 +13,6 @@ pipeline {
 			}
 		}
 
-
-        
         stage('Build') {
             steps {
                 echo 'Construyendo el proyecto...'
@@ -56,17 +54,5 @@ pipeline {
                 sh 'echo "Despliegue realizado!"'
             }
         }*/
-    }
-
-    post {
-        always {
-            echo 'Este paso siempre se ejecutará al final del pipeline.'
-        }
-        success {
-            echo 'El pipeline se ejecutó con éxito.'
-        }
-        failure {
-            echo 'El pipeline falló.'
-        }
     }
 }
