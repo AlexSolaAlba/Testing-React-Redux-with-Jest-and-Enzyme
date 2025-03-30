@@ -9,13 +9,14 @@ pipeline {
             }
         }
         stage('Install Dependencies') {
-            steps {
-                script {
-                    echo "Instalando dependencias..."
-                    sh 'npm install'
-                }
-            }
-        }
+			steps {
+				script {
+					sh 'export PATH=$PATH:/usr/local/bin'
+					sh 'npm install'
+				}
+			}
+		}
+
         
         stage('Build') {
             steps {
