@@ -2,7 +2,21 @@ pipeline {
     agent any
    
     stages {
-        // Etapa de Build
+    
+		stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    echo "Instalando dependencias..."
+                    sh 'npm install'
+                }
+            }
+        }
+        
         stage('Build') {
             steps {
                 echo 'Construyendo el proyecto...'
@@ -11,7 +25,6 @@ pipeline {
             }
         }
         
-        // Etapa de Testing
         stage('Testing') {
             parallel {
                 // Pruebas Unitarias (Jest)
