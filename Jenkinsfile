@@ -50,7 +50,6 @@ pipeline {
             }
             steps {
                 echo 'Desplegando el proyecto...'
-                // Aquí puedes agregar comandos para hacer el deploy si es necesario
                 sh 'echo "Despliegue realizado!"'
             }
         }*/
