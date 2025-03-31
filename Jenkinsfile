@@ -43,15 +43,14 @@ pipeline {
             }
         }
 
-        // Etapa de Deploy (si lo deseas)
-        /*stage('Deploy') {
+        stage('Deploy') {
             when {
                 branch 1-prueba-rama-feature  // Solo en la rama feature
             }
             steps {
-                echo 'Desplegando el proyecto...'
-                sh 'echo "Despliegue realizado!"'
+                    echo 'Desplegando a producción'
+                    sh './deploy.sh production'
             }
-        }*/
+        }
     }
 }
