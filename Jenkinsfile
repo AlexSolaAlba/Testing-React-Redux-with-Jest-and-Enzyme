@@ -2,14 +2,14 @@ pipeline {
     agent any
     
     stages {
-        stage('Escanear puertos abiertos') {
+        stage('Generar hashes SHA-256') {
             steps {
                 script {
                     def timestamp = new Date().format("yyyyMMdd_HHmmss")
-                    def scanFile = "puertos_${timestamp}.txt"
-                    def ip = sh(script: """hostname -I | awk '{print \$1}'""", returnStdout: true).trim()
-                    sh "nmap -p- ${ip} > ${scanFile}"
-                    archiveArtifacts artifacts: scanFile, fingerprint: true
+                    def hashFile = "hashes_${timestamp}.txt"
+                    def targetPath = "JENKINS_HOME/workspace/folderName/subfolderName/projectNameFile"
+                    sh "find ${targetPath} -type f -exec sha256sum {} + > ${hashFile}"
+                    archiveArtifacts artifacts: hashFile, fingerprint: true
                 }
             }
         }
