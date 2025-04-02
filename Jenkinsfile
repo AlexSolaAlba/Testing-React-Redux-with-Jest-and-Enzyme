@@ -1,15 +1,13 @@
 pipeline {
     agent any
-    
-    stages {
-        stage('Obtener versiones') {
+        stage('Escanear puertos abiertos') {
             steps {
                 script {
                     def timestamp = new Date().format("yyyyMMdd_HHmmss")
-                    def versionFile = "versiones_${timestamp}.txt"
-                    sh "java -version 2>&1 | tee ${versionFile}"
-                    sh "jenkins --version >> ${versionFile}"
-                    archiveArtifacts artifacts: versionFile, fingerprint: true
+                    def scanFile = "puertos_${timestamp}.txt"
+                    def ip = sh(script: "hostname -I | awk '{print $1}'", returnStdout: true).trim()
+                    sh "nmap -p- ${ip} > ${scanFile}"
+                    archiveArtifacts artifacts: scanFile, fingerprint: true
                 }
             }
         }
