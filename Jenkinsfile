@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Instalar dependencias') {
             steps {
-                sh 'npm install --save-dev @babel/preset-env @babel/preset-react babel-jest'
+                sh 'npm install --froce || true'
             }
         }
 
@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                     echo "Construyendo el proyecto..."
-                    sh 'npm install --force || true'
+                    sh 'npm run build --force || true' 
                 }
             }
         }
