@@ -19,7 +19,7 @@ pipeline {
         
         stage('Ejecutar pruebas y generar cobertura') {
             steps {
-                sh 'npx jest --coverage --passWithNoTests'
+                sh 'npx jest --coverage --passWithNoTests --config=jest.config.js'
             }
         }
 
