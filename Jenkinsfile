@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Instalar dependencias') {
             steps {
-                sh 'npm install --force || true'
+                sh 'npm install --legacy-peer-deps || true'
             }
         }
 
