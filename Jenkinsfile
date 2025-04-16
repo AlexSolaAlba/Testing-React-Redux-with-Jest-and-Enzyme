@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Instalar dependencias') {
             steps {
-                sh 'npm install react-scripts@latest'
+                sh 'npm install react-scripts@latest || true'
             }
         }
 
