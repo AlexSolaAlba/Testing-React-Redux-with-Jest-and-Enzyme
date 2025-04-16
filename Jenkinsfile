@@ -1,18 +1,58 @@
 pipeline {
     agent any
     
+    environment {
+        // Aquí puedes definir variables de entorno globales
+        // Ejemplo: NPM_HOME = '/path/to/npm'
+    }
+
     stages {
-        stage('Generar hashes SHA-256') {
+        stage('Instalar dependencias') {
+            steps {
+                sh 'npm install --force || true'
+            }
+        }
+
+        stage('Build') {
             steps {
                 script {
-                    def timestamp = new Date().format("yyyyMMdd_HHmmss")
-                    def hashFile = "hashes_${timestamp}.txt"
-                    def targetPath = "/var/lib/jenkins/workspace/PipelineBuildTestDeploy/"
-                    sh "find ${targetPath} -type f -exec sha256sum {} + > ${hashFile}"
-                    archiveArtifacts artifacts: hashFile, fingerprint: true
+                    echo "Construyendo el proyecto..."
+                    sh 'npm run build --force || true' 
                 }
             }
         }
-	}
-}
+        
+        stage('Ejecutar pruebas y generar cobertura') {
+            steps {
+                sh 'npx jest --coverage --passWithNoTests'
+            }
+        }
 
+        stage('Publicar reporte de cobertura') {
+            steps {
+                publishHTML([
+                    allowMissing: true,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
+                    reportDir: 'coverage/lcov-report',
+                    reportFiles: 'index.html',
+                    reportName: 'Cobertura de Código'
+                ])
+            }
+        }
+    }
+
+    post {
+        always {
+            echo "Pipeline completado."
+        }
+        
+        success {
+            echo "El pipeline se completó con éxito."
+        }
+
+        failure {
+            echo "El pipeline falló."
+        }
+    }
+}
