@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                     echo "Construyendo el proyecto..."
-                    sh 'npm install || true' 
+                    sh 'npm install --force || true'
                 }
             }
         }
