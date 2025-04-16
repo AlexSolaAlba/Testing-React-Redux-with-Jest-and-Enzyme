@@ -42,4 +42,10 @@
     "jest-enzyme": "^7.0.1",
     "moxios": "^0.4.0"
   }
+  
+  "jest": {
+  "transform": {
+    "^.+\\.jsx?$": "babel-jest"
+  }
+}
 }

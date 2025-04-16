@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Instalar dependencias') {
             steps {
-                sh 'npm install react-scripts@latest || true'
+                sh 'npm install'
             }
         }
 
@@ -12,7 +12,9 @@ pipeline {
             steps {
                 script {
                     echo "Construyendo el proyecto..."
-                    sh 'npm run build --force || true' 
+                    sh 'npm install' 
+                    sh 'npm install --legacy-peer-deps' 
+                    sh 'npm install --save-dev @babel/core @babel/preset-env @babel/preset-react babel-jest' 
                 }
             }
         }
