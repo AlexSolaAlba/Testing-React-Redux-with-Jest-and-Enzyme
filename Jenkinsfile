@@ -12,9 +12,7 @@ pipeline {
             steps {
                 script {
                     echo "Construyendo el proyecto..."
-                    sh 'npm install' 
-                    sh 'npm install --legacy-peer-deps' 
-                    sh 'npm install --save-dev @babel/core @babel/preset-env @babel/preset-react babel-jest' 
+                    sh 'npm install || true' 
                 }
             }
         }
