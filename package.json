@@ -43,8 +43,6 @@
     "moxios": "^0.4.0"
   },
   "jest": {
-    "transform": {
-      "^.+\\.jsx?$": "babel-jest"
-    }
+
   }
 }
