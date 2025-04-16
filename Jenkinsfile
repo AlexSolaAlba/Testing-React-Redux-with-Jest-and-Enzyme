@@ -1,11 +1,6 @@
 pipeline {
     agent any
     
-    environment {
-        // Aquí puedes definir variables de entorno globales
-        // Ejemplo: NPM_HOME = '/path/to/npm'
-    }
-
     stages {
         stage('Instalar dependencias') {
             steps {
